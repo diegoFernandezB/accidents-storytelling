@@ -140,13 +140,32 @@ li:hover {
     padding: 15px;
     border-left: 5px solid #4fc3f7;
     margin-bottom: 15px;
-    border-radius: 5px; /* Añadimos border-radius para uniformidad */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones para el hover */
+    border-radius: 5px;
+    cursor: pointer; /* Indica que es clickeable */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Añadimos background-color a la transición */
+    box-sizing: border-box; /* Asegura que padding y border no afecten el tamaño final al escalar */
 }
 
+/* Efecto al pasar el ratón sobre el insight */
 .insight:hover {
+    background-color: #3a3a3a; /* Un color ligeramente más claro para el hover */
     transform: translateY(-3px); /* Se eleva un poco */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra sutil más pronunciada */
+}
+
+/* Clase para el insight agrandado (se añadirá/quitará con JavaScript) */
+.insight.active {
+    transform: scale(1.05); /* Se agranda un 5% */
+    background-color: #4fc3f7; /* Cambia a azul brillante al estar activo */
+    color: #1e1e1e; /* Cambia el color del texto para que contraste */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra más grande */
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
+    position: relative; /* Necesario para que z-index funcione correctamente */
+}
+
+/* Puedes añadir un estilo para los párrafos dentro de .insight.active para mejor lectura */
+.insight.active p, .insight.active strong, .insight.active br {
+    color: #1e1e1e; /* Asegura que el texto se lea bien sobre el fondo azul */
 }
 
 
