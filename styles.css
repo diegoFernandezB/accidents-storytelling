@@ -56,12 +56,12 @@ a:hover {
     margin-bottom: 40px;
     padding: 20px;
     border-radius: 8px;
-    background-color: #2c2c2c;
+    background-color: #2c2c2c; /* Color de fondo original */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Añadimos background-color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Transición para el hover y active */
     cursor: pointer; /* Indicar que es clickeable */
     overflow: hidden; /* Muy importante para la animación de altura del contenido */
-    position: relative; /* Para posibles posicionamientos internos */
+    position: relative; /* Para posibles posicionamientos internos y z-index */
 }
 
 /* Modificamos el hover para .section para que actúe como un elemento clickeable */
@@ -71,15 +71,24 @@ a:hover {
     background-color: #3a3a3a; /* Un color ligeramente más claro para el hover */
 }
 
-/* Clase para la sección activa */
+/* Clase para la sección activa (no cambia el color de fondo) */
 .section.active-section {
-    background-color: #4fc3f7; /* Cambia a azul brillante al estar activo */
-    color: #1e1e1e; /* Cambia el color del texto para que contraste */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra más grande */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra más grande para enfatizar */
     transform: scale(1.01); /* Un ligero agrandamiento para enfatizar */
     z-index: 5; /* Asegura que esté por encima de secciones no activas si se superponen ligeramente */
     position: relative;
+    /* No hay cambio de background-color ni color de texto aquí */
 }
+
+/* Aseguramos que el color del texto dentro de la sección activa mantenga el color original del body */
+.section.active-section p, 
+.section.active-section strong, 
+.section.active-section em, 
+.section.active-section ul,
+.section.active-section li {
+    color: #f0f0f0; /* Color original del texto del body */
+}
+
 
 /* Estilo para el contenido *dentro* de las secciones que se ocultará/mostrará */
 /* Seleccionamos todos los hijos directos de .section excepto el h2 (título) */
@@ -94,7 +103,7 @@ a:hover {
 
 /* Cuando la sección está activa, mostramos su contenido */
 .section.active-section > *:not(h2) {
-    max-height: 1000px; /* Un valor grande para que todo el contenido se muestre */
+    max-height: 1000px; /* Un valor grande para que todo el contenido se muestre. Ajusta si tu contenido es más alto. */
     opacity: 1; /* Visible */
     margin-top: 15px; /* Restaura un margen superior para separar del título */
     padding-bottom: 10px; /* Restaura un padding inferior si lo tuviera, o añade un pequeño espacio */
@@ -103,16 +112,11 @@ a:hover {
 /* Aseguramos que el título de la sección siempre esté visible y no participe en la animación de contenido */
 .section h2 {
     pointer-events: none; /* Esto hace que los clics pasen a su padre (.section) */
-    /* Mantén tus animaciones fadeInSlideUp si quieres, pero no estarán ocultas/mostradas con este método */
     animation: none; /* Desactivar la animación de aparición si existe conflicto */
     opacity: 1; /* Asegurar que siempre esté visible */
 }
 
-/* Ajustes para el pie de página (footer) para asegurar visibilidad si se superpone */
-footer {
-    position: relative; /* Asegura que el footer se mantenga por encima de elementos anteriores */
-    z-index: 10;
-}
+
 /* 6. Animación de aparición de las secciones y su contenido */
 @keyframes fadeInSlideUp {
     0% {
@@ -125,13 +129,17 @@ footer {
     }
 }
 
+/* Inicialmente invisibles y animados si quieres que aparezcan al cargar */
 .section {
-    animation: fadeInSlideUp 0.8s ease-out forwards; /* Aplicamos la animación a las secciones */
-    opacity: 0; /* Aseguramos que empiecen invisibles */
+    animation: fadeInSlideUp 0.8s ease-out forwards;
+    opacity: 0;
 }
 
-/* Delay para que el contenido dentro de las secciones aparezca un poco después */
-.section h2 {
+/* Estos selectores específicos pueden causar conflictos con el comportamiento de mostrar/ocultar del JS
+   Si quieres que el contenido se anime al aparecer *y* al expandirse, la lógica es más compleja.
+   Para el comportamiento de "clic para expandir", las propiedades de max-height/opacity en .section > *:not(h2) son suficientes.
+   Puedes comentar o eliminar estas reglas si el comportamiento no es el deseado. */
+/* .section h2 {
     animation: fadeInSlideUp 0.8s ease-out 0.2s forwards;
     opacity: 0;
 }
@@ -144,7 +152,8 @@ footer {
 .section .insight, .section ul {
     animation: fadeInSlideUp 0.8s ease-out 0.4s forwards;
     opacity: 0;
-}
+} */
+
 
 /* 7. Estilización de imágenes con efecto de "levantamiento" */
 img {
@@ -158,8 +167,6 @@ img:hover {
     transform: scale(1.02); /* Efecto de aumento al pasar el ratón, un poco más sutil */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al elevarse */
 }
-
-/* 8. Mejorar la tipografía (ya cubierta por Roboto en body) */
 
 /* Estilo para los insights, con efecto de levantamiento al pasar el ratón */
 .insight {
@@ -250,5 +257,6 @@ footer {
     padding: 20px;
     margin-top: 50px; /* Espacio antes del footer */
     box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-    /* No lo fijamos para que el contenido fluya normalmente */
+    position: relative; /* Asegura que el footer se mantenga por encima de elementos anteriores */
+    z-index: 10;
 }
