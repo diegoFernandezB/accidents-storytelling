@@ -58,14 +58,61 @@ a:hover {
     border-radius: 8px;
     background-color: #2c2c2c;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Añadimos background-color */
+    cursor: pointer; /* Indicar que es clickeable */
+    overflow: hidden; /* Muy importante para la animación de altura del contenido */
+    position: relative; /* Para posibles posicionamientos internos */
 }
 
+/* Modificamos el hover para .section para que actúe como un elemento clickeable */
 .section:hover {
     transform: translateY(-5px); /* Se eleva un poco al pasar el ratón */
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al elevarse */
+    background-color: #3a3a3a; /* Un color ligeramente más claro para el hover */
 }
 
+/* Clase para la sección activa */
+.section.active-section {
+    background-color: #4fc3f7; /* Cambia a azul brillante al estar activo */
+    color: #1e1e1e; /* Cambia el color del texto para que contraste */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra más grande */
+    transform: scale(1.01); /* Un ligero agrandamiento para enfatizar */
+    z-index: 5; /* Asegura que esté por encima de secciones no activas si se superponen ligeramente */
+    position: relative;
+}
+
+/* Estilo para el contenido *dentro* de las secciones que se ocultará/mostrará */
+/* Seleccionamos todos los hijos directos de .section excepto el h2 (título) */
+.section > *:not(h2) {
+    max-height: 0; /* Inicialmente oculto colapsado */
+    opacity: 0; /* Totalmente invisible */
+    overflow: hidden; /* Para asegurar que el contenido no se desborde al estar colapsado */
+    transition: max-height 0.7s ease-out, opacity 0.7s ease-out, margin-top 0.7s ease-out; /* Transición suave */
+    margin-top: 0; /* Sin margen superior cuando está colapsado */
+    padding-bottom: 0; /* Sin padding inferior cuando está colapsado */
+}
+
+/* Cuando la sección está activa, mostramos su contenido */
+.section.active-section > *:not(h2) {
+    max-height: 1000px; /* Un valor grande para que todo el contenido se muestre */
+    opacity: 1; /* Visible */
+    margin-top: 15px; /* Restaura un margen superior para separar del título */
+    padding-bottom: 10px; /* Restaura un padding inferior si lo tuviera, o añade un pequeño espacio */
+}
+
+/* Aseguramos que el título de la sección siempre esté visible y no participe en la animación de contenido */
+.section h2 {
+    pointer-events: none; /* Esto hace que los clics pasen a su padre (.section) */
+    /* Mantén tus animaciones fadeInSlideUp si quieres, pero no estarán ocultas/mostradas con este método */
+    animation: none; /* Desactivar la animación de aparición si existe conflicto */
+    opacity: 1; /* Asegurar que siempre esté visible */
+}
+
+/* Ajustes para el pie de página (footer) para asegurar visibilidad si se superpone */
+footer {
+    position: relative; /* Asegura que el footer se mantenga por encima de elementos anteriores */
+    z-index: 10;
+}
 /* 6. Animación de aparición de las secciones y su contenido */
 @keyframes fadeInSlideUp {
     0% {
