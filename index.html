@@ -11,12 +11,11 @@
   <h1>🚦 Predicción de Accidentes de Tránsito</h1>
   <p><strong>Autores:</strong> Calfín & Fernández</p>
 
-  <div class="section">
-    <h2>🎯 Objetivo</h2>
+  <div class="section" id="section-objetivo"> <h2>🎯 Objetivo</h2>
     <p>Analizar las condiciones del entorno urbano y vehicular para predecir la cantidad de accidentes de tránsito usando modelos de minería de datos, y comunicar visualmente los hallazgos a partir de datos reales.</p>
   </div>
 
-  <div class="section">
+  <div class="section" id="section-insights">
     <h2>🔍 Insights Principales</h2>
     <div class="insight" id="insight1">
       <strong>1. Densidad de tráfico y multas: combinación crítica</strong><br>
@@ -33,13 +32,13 @@
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="section-modelo">
     <h2>🧠 Modelo Aplicado</h2>
     <p>Se utilizó un árbol de regresión (`DecisionTreeRegressor`) con ajuste de hiperparámetros mediante `GridSearchCV`. Se aplicó escalamiento previo de los datos con `StandardScaler`.</p>
     <img src="img/arbol.png" alt="Arbol de Regresión"> 
   </div>
 
-  <div class="section">
+  <div class="section" id="section-visualizaciones">
     <h2>📊 Visualizaciones</h2>
     <ul>
       <li id="li-nube">
@@ -53,24 +52,24 @@
     </ul>
   </div>
 
-  <div class="section">
+  <div class="section" id="section-aplicaciones">
     <h2>📌 Aplicaciones reales</h2>
     <p>Este modelo de predicción es una herramienta estratégica para **organismos públicos y municipales**, diseñada para generar un impacto directo en la seguridad vial. Permite:</p>
     <ul>
       <li id="li-recursos">**Focalizar recursos** en áreas y momentos de mayor riesgo predicho.
-        <img src="img/uno.jpg" alt="Nube de palabras de variables importantes">
+        <img src="img/uno.jpg" alt="Optimización de recursos de emergencia">
       </li>
       <li id="li-fiscalizacion">**Mejorar la fiscalización** y la presencia preventiva donde más se necesita.
-        <img src="img/dos.png" alt="Nube de palabras de variables importantes">
+        <img src="img/dos.png" alt="Mejora de la infraestructura vial">
       </li>
       <li id="li-reducir">**Reducir significativamente la ocurrencia de accidentes** al identificar y mitigar condiciones críticas del entorno urbano y vehicular.
-        <img src="img/tres.jpeg" alt="Nube de palabras de variables importantes">
+        <img src="img/tres.jpeg" alt="Reducción de accidentes">
       </li>
     </ul>
     <p>Su implementación se traduce en ciudades más seguras y una gestión más eficiente de la infraestructura vial.</p>
   </div>
 
-  <div class="section">
+  <div class="section" id="section-enlaces">
     <h2>🔗 Enlaces útiles</h2>
     <p>Publicación en LinkedIn: <a href="#" class="button">Ir</a></p>
     <p>Repositorio del código: <a href="#" class="button">Ir</a></p>
@@ -105,21 +104,21 @@
             }
         });
 
-        // --- Nuevo JavaScript para los ítems de lista (<li>) ---
+        // --- JavaScript para los ítems de lista (<li>) ---
         const listItems = document.querySelectorAll('.section ul li');
-        let activeListItem = null; // Para controlar el li activo
+        let activeListItem = null; 
 
         listItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Si hay un li activo diferente, desactívalo
+            item.addEventListener('click', (event) => {
+                // Previene que el clic en el LI también active la sección padre
+                event.stopPropagation(); 
+
                 if (activeListItem && activeListItem !== item) {
                     activeListItem.classList.remove('active-list-item');
                 }
 
-                // Alternar la clase 'active-list-item' en el li clickeado
                 item.classList.toggle('active-list-item');
 
-                // Actualizar el li activo
                 if (item.classList.contains('active-list-item')) {
                     activeListItem = item;
                 } else {
@@ -133,6 +132,45 @@
             if (activeListItem && !event.target.closest('.section ul li')) {
                 activeListItem.classList.remove('active-list-item');
                 activeListItem = null;
+            }
+        });
+
+        // --- Nuevo JavaScript para las SECCIONES (div.section) ---
+        const sections = document.querySelectorAll('.section');
+        let activeSection = null;
+
+        sections.forEach(section => {
+            // Asegúrate de que el clic en los elementos internos no active la sección padre
+            // Esto es crucial para los "insights" y los "li" dentro de las secciones
+            section.querySelectorAll('.insight, ul li, p, img, a').forEach(child => {
+                child.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Detiene la propagación del evento al padre
+                });
+            });
+
+            section.addEventListener('click', () => {
+                // Si hay una sección activa diferente, desactívala
+                if (activeSection && activeSection !== section) {
+                    activeSection.classList.remove('active-section');
+                }
+
+                // Alternar la clase 'active-section' en la sección clickeada
+                section.classList.toggle('active-section');
+
+                // Actualizar la sección activa
+                if (section.classList.contains('active-section')) {
+                    activeSection = section;
+                } else {
+                    activeSection = null;
+                }
+            });
+        });
+
+        // Opcional: Desactivar la sección activa al hacer clic fuera de cualquier sección
+        document.addEventListener('click', (event) => {
+            if (activeSection && !event.target.closest('.section')) {
+                activeSection.classList.remove('active-section');
+                activeSection = null;
             }
         });
     });
