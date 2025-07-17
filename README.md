@@ -29,8 +29,8 @@ Aquí algunas de las visualizaciones que sustentan nuestros insights:
 
 ## Micrositio público (Storytelling)
 
-Puedes ver el micrositio con todos los insights y visualizaciones en el siguiente enlace:  
-https://TU_USUARIO.github.io/NOMBRE_DEL_REPO/
+Puedes ver el micrositio con los insights y visualizaciones en el siguiente enlace:  
+https://diegofernandezb.github.io/accidents-storytelling/
 
 (Reemplazar con la URL real una vez activado GitHub Pages)
 
