@@ -161,8 +161,11 @@ li {
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     cursor: pointer;
-    overflow: hidden; /* Oculta el contenido que se desborda, importante para la imagen oculta */
-    position: relative; /* Para posicionar la imagen si es necesario */
+    overflow: hidden; /* Muy importante para la animación de altura */
+    position: relative;
+    display: flex; /* Usamos flexbox para controlar la dirección de los elementos internos */
+    flex-direction: column; /* Coloca los ítems en columna (texto arriba, imagen abajo) */
+    align-items: flex-start; /* Alinea el contenido al inicio */
 }
 
 li:hover {
@@ -176,21 +179,21 @@ li img {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 15px; /* Espacio entre el texto del li y la imagen */
-    height: 0; /* Inicialmente oculta la imagen colapsándola */
-    opacity: 0; /* Asegura que no se vea */
-    transition: height 0.5s ease-out, opacity 0.5s ease-out; /* Transición suave para aparición */
-    object-fit: contain; /* Asegura que la imagen se vea completa */
-    display: block; /* Para que 'height' funcione correctamente */
+    max-height: 0; /* Cambiamos height a max-height para una transición más fiable */
+    opacity: 0;
+    transition: max-height 0.6s ease-out, opacity 0.6s ease-out, margin-top 0.6s ease-out; /* Animamos también el margen para un colapso más suave */
+    display: block; /* Asegura que la imagen ocupe su propia línea */
+    object-fit: contain;
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
 }
 
 /* Cuando el li es "activo", la imagen se muestra */
 li.active-list-item img {
-    height: auto; /* O ajusta a un max-height si la altura es variable */
-    opacity: 1; /* Hace que la imagen sea visible */
-    padding-bottom: 10px; /* Pequeño padding al final de la imagen */
+    max-height: 300px; /* Un valor lo suficientemente grande para que la imagen se muestre. Ajusta según el tamaño máximo de tus imágenes. */
+    opacity: 1;
+    margin-top: 15px; /* Restaura el margen superior */
 }
 
-/* ... (el resto de tu CSS) ... */
 
 /* 10. Estilizar el pie de página */
 footer {
