@@ -1,118 +1,162 @@
-/* 1. Fondo con gradiente */
+/* 1. Fondo con gradiente y efecto parallax sutil */
 body {
-  background: linear-gradient(135deg, #2c3e50, #4ca1af); /* Gradiente azul oscuro a azul claro */
-  color: #f0f0f0;
-  font-family: 'Roboto', sans-serif;
-  padding: 30px;
-  line-height: 1.6;
-  margin: 0;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af) fixed; /* Gradiente azul oscuro a azul claro, con 'fixed' para parallax */
+    background-size: cover; /* Asegura que el gradiente cubra toda la pantalla */
+    color: #f0f0f0;
+    font-family: 'Roboto', sans-serif; /* Asegúrate de importar la fuente en el HTML */
+    padding: 30px;
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: hidden; /* Evita barras de desplazamiento horizontales por animaciones */
 }
 
 /* 2. Sombras en los textos */
 h1, h2 {
-  color: #4fc3f7;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    color: #4fc3f7;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Sombra sutil */
 }
 
 /* 3. Transiciones en enlaces */
 a {
-  color: #4fc3f7;
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.3s ease; /* Transición suave */
+    color: #4fc3f7;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease; /* Transición suave */
 }
 
 a:hover {
-  color: #ff5722; /* Cambiar color al pasar el ratón */
-  transform: scale(1.1); /* Aumentar tamaño */
+    color: #ff5722; /* Cambiar color al pasar el ratón */
+    transform: scale(1.1); /* Aumentar tamaño */
 }
 
 /* 4. Botones estilizados */
 .button {
-  background-color: #4fc3f7;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s, transform 0.3s;
+    background-color: #4fc3f7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button:hover {
-  background-color: #0288d1;
-  transform: scale(1.05); /* Efecto de aumento */
+    background-color: #0288d1;
+    transform: scale(1.05); /* Efecto de aumento */
 }
 
-/* 5. Sombras en las secciones */
+.button:active {
+    transform: scale(0.95); /* Se encoge un poco al hacer click */
+    background-color: #01579b; /* Cambio de color más oscuro */
+}
+
+/* 5. Sombras y efecto de "levantamiento" en las secciones */
 .section {
-  margin-bottom: 40px;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #2c2c2c;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el hover */
 }
 
-/* 6. Animación de aparición de las secciones */
-@keyframes fadeIn {
-  0% {
+.section:hover {
+    transform: translateY(-5px); /* Se eleva un poco al pasar el ratón */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al elevarse */
+}
+
+/* 6. Animación de aparición de las secciones y su contenido */
+@keyframes fadeInSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    animation: fadeInSlideUp 0.8s ease-out forwards; /* Aplicamos la animación a las secciones */
+    opacity: 0; /* Aseguramos que empiecen invisibles */
+}
+
+/* Delay para que el contenido dentro de las secciones aparezca un poco después */
+.section h2 {
+    animation: fadeInSlideUp 0.8s ease-out 0.2s forwards;
     opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
-.section {
-  animation: fadeIn 0.8s ease-out;
+.section p {
+    animation: fadeInSlideUp 0.8s ease-out 0.3s forwards;
+    opacity: 0;
 }
 
-/* 7. Estilización de imágenes */
+.section .insight, .section ul {
+    animation: fadeInSlideUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+}
+
+/* 7. Estilización de imágenes con efecto de "levantamiento" */
 img {
-  max-width: 100%;
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  transition: transform 0.3s ease;
+    max-width: 100%;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Añadimos transición para la sombra */
 }
 
 img:hover {
-  transform: scale(1.05); /* Efecto de aumento al pasar el ratón */
+    transform: scale(1.02); /* Efecto de aumento al pasar el ratón, un poco más sutil */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al elevarse */
 }
 
-/* 8. Mejorar la tipografía */
-body {
-  font-family: 'Roboto', sans-serif; /* Asegúrate de importar la fuente en el HTML */
-}
+/* 8. Mejorar la tipografía (ya cubierta por Roboto en body) */
 
-/* 9. Mejorar las listas */
+/* 9. Mejorar las listas y sus ítems */
 ul {
-  list-style-type: none; /* Elimina los puntos de las listas */
-  padding-left: 0;
+    list-style-type: none; /* Elimina los puntos de las listas */
+    padding-left: 0;
 }
 
 li {
-  background-color: #333;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+    background-color: #333;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición para color y transformación */
+    cursor: pointer; /* Indica que es interactuable */
 }
 
 li:hover {
-  background-color: #4fc3f7; /* Cambio de color al pasar el ratón */
+    background-color: #4fc3f7; /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Deslizamiento sutil a la derecha */
 }
+
+/* Estilo para los insights, con efecto de levantamiento al pasar el ratón */
+.insight {
+    background-color: #2c2c2c;
+    padding: 15px;
+    border-left: 5px solid #4fc3f7;
+    margin-bottom: 15px;
+    border-radius: 5px; /* Añadimos border-radius para uniformidad */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones para el hover */
+}
+
+.insight:hover {
+    transform: translateY(-3px); /* Se eleva un poco */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Sombra sutil más pronunciada */
+}
+
 
 /* 10. Estilizar el pie de página */
 footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px; /* Espacio antes del footer */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    /* No lo fijamos para que el contenido fluya normalmente */
 }
