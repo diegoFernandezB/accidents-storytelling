@@ -15,6 +15,7 @@ Se utilizó un árbol de decisión (DecisionTreeRegressor) ajustado con GridSear
 - Calidad del pavimento
 - Multas de tránsito
 - Velocidad promedio y otras
+![Árbol](img/arbol.png)
 
 ## Visualizaciones
 
@@ -23,8 +24,8 @@ Aquí algunas de las visualizaciones que sustentan nuestros insights:
 ### Variables más influyentes
 ![Wordcloud](img/nube.png)
 
-### Relación pavimento y accidentes
-![Scatter](img/grafi.png)
+### Impácto de la densidad del tráfico en los accidentes
+![Densidad](img/grafi.png)
 
 ## Micrositio público (Storytelling)
 
