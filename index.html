@@ -42,16 +42,26 @@
   <div class="section">
     <h2>📊 Visualizaciones</h2>
     <ul>
-      <li>Nube de palabras con variables más importantes</li>
-      <img src="img/nube.png" alt="Nube de palabras"> 
-      <li>Gráfico de dispersión: Pavimento vs Accidentes</li>
-      <img src="img/grafi.png" alt="Gráfico densidad"> 
+      <li id="li-nube">
+        Nube de palabras con variables más importantes
+        <img src="img/nube.png" alt="Nube de palabras de variables importantes"> 
+      </li>
+      <li id="li-grafico">
+        Gráfico de dispersión: Pavimento vs Accidentes
+        <img src="img/grafi.png" alt="Gráfico de dispersión Pavimento vs Accidentes"> 
+      </li>
     </ul>
   </div>
 
   <div class="section">
     <h2>📌 Aplicaciones reales</h2>
-    <p>Este modelo puede ser usado por organismos públicos para focalizar recursos, mejorar la fiscalización y reducir el riesgo de accidentes en condiciones críticas.</p>
+    <p>Este modelo de predicción es una herramienta estratégica para **organismos públicos y municipales**, diseñada para generar un impacto directo en la seguridad vial. Permite:</p>
+    <ul>
+      <li>**Focalizar recursos** en áreas y momentos de mayor riesgo predicho.</li>
+      <li>**Mejorar la fiscalización** y la presencia preventiva donde más se necesita.</li>
+      <li>**Reducir significativamente la ocurrencia de accidentes** al identificar y mitigar condiciones críticas del entorno urbano y vehicular.</li>
+    </ul>
+    <p>Su implementación se traduce en ciudades más seguras y una gestión más eficiente de la infraestructura vial.</p>
   </div>
 
   <div class="section">
@@ -66,19 +76,14 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const insights = document.querySelectorAll('.insight');
-        let activeInsight = null; // Para guardar el insight que está agrandado
+        let activeInsight = null; 
 
         insights.forEach(insight => {
             insight.addEventListener('click', () => {
-                // Si ya hay un insight activo y es diferente al clickeado, lo desactivamos
                 if (activeInsight && activeInsight !== insight) {
                     activeInsight.classList.remove('active');
                 }
-                
-                // Alternar la clase 'active' en el insight clickeado
                 insight.classList.toggle('active');
-
-                // Actualizar cuál es el insight activo
                 if (insight.classList.contains('active')) {
                     activeInsight = insight;
                 } else {
@@ -87,11 +92,41 @@
             });
         });
 
-        // Opcional: Desactivar el insight activo al hacer clic fuera de cualquier insight
         document.addEventListener('click', (event) => {
             if (activeInsight && !event.target.closest('.insight')) {
                 activeInsight.classList.remove('active');
                 activeInsight = null;
+            }
+        });
+
+        // --- Nuevo JavaScript para los ítems de lista (<li>) ---
+        const listItems = document.querySelectorAll('.section ul li');
+        let activeListItem = null; // Para controlar el li activo
+
+        listItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Si hay un li activo diferente, desactívalo
+                if (activeListItem && activeListItem !== item) {
+                    activeListItem.classList.remove('active-list-item');
+                }
+
+                // Alternar la clase 'active-list-item' en el li clickeado
+                item.classList.toggle('active-list-item');
+
+                // Actualizar el li activo
+                if (item.classList.contains('active-list-item')) {
+                    activeListItem = item;
+                } else {
+                    activeListItem = null;
+                }
+            });
+        });
+
+        // Opcional: Desactivar el li activo al hacer clic fuera de cualquier li
+        document.addEventListener('click', (event) => {
+            if (activeListItem && !event.target.closest('.section ul li')) {
+                activeListItem.classList.remove('active-list-item');
+                activeListItem = null;
             }
         });
     });
