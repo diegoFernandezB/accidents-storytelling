@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Storytelling: Predicción de Accidentes</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #4fc3f7;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    img {
+      max-width: 100%;
+      border: 1px solid #444;
+      border-radius: 5px;
+    }
+    .insight {
+      background-color: #2c2c2c;
+      padding: 15px;
+      border-left: 5px solid #4fc3f7;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚦 Predicción de Accidentes de Tránsito</h1>
+  <p><strong>Autores:</strong> Calfín & Fernández</p>
+
+  <div class="section">
+    <h2>🎯 Objetivo</h2>
+    <p>Analizar las condiciones del entorno urbano y vehicular para predecir la cantidad de accidentes de tránsito usando modelos de minería de datos, y comunicar visualmente los hallazgos a partir de datos reales.</p>
+  </div>
+
+  <div class="section">
+    <h2>🔍 Insights Principales</h2>
+    <div class="insight">
+      <strong>1. Densidad de tráfico y multas: combinación crítica</strong><br>
+      A mayor densidad y mayor cantidad de multas, el riesgo de accidentes predichos aumenta significativamente.
+    </div>
+    <div class="insight">
+      <strong>2. Lluvia + mal pavimento = más accidentes</strong><br>
+      Las zonas con pavimento deteriorado y lluvia intensa presentan mayores niveles de accidentes predichos.
+    </div>
+    <div class="insight">
+      <strong>3. Variables más influyentes</strong><br>
+      Según el árbol de regresión, las variables con mayor impacto fueron:<br>
+      <em>traffic_density, traffic_fine_amount, rain_intensity, vehicle_count</em>.
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🧠 Modelo Aplicado</h2>
+    <p>Se utilizó un árbol de regresión (`DecisionTreeRegressor`) con ajuste de hiperparámetros mediante `GridSearchCV`. Se aplicó escalamiento previo de los datos con `StandardScaler`.</p>
+  </div>
+
+  <div class="section">
+    <h2>📊 Visualizaciones</h2>
+    <p>Aquí puedes insertar tus imágenes exportadas o visualizaciones interactivas:</p>
+    <ul>
+      <li>Nube de palabras con variables más importantes</li>
+      <li>Gráfico de dispersión: Pavimento vs Accidentes</li>
+    </ul>
+    <!-- Ejemplo de imagen: -->
+    <!-- <img src="img/wordcloud.png" alt="Nube de palabras"> -->
+  </div>
+
+  <div class="section">
+    <h2>📌 Aplicaciones reales</h2>
+    <p>Este modelo puede ser usado por organismos públicos para focalizar recursos, mejorar la fiscalización y reducir el riesgo de accidentes en condiciones críticas.</p>
+  </div>
+
+  <div class="section">
+    <h2>🔗 Enlaces útiles</h2>
+    <p>Publicación en LinkedIn: <a href="#" style="color:#4fc3f7;">(aquí tu link)</a></p>
+    <p>Repositorio del código: <a href="#" style="color:#4fc3f7;">(GitHub)</a></p>
+  </div>
+
+</body>
+</html>
