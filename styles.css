@@ -114,25 +114,6 @@ img:hover {
 
 /* 8. Mejorar la tipografía (ya cubierta por Roboto en body) */
 
-/* 9. Mejorar las listas y sus ítems */
-ul {
-    list-style-type: none; /* Elimina los puntos de las listas */
-    padding-left: 0;
-}
-
-li {
-    background-color: #333;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición para color y transformación */
-    cursor: pointer; /* Indica que es interactuable */
-}
-
-li:hover {
-    transform: translateX(5px); /* Deslizamiento sutil a la derecha */
-}
-
 /* Estilo para los insights, con efecto de levantamiento al pasar el ratón */
 .insight {
     background-color: #2c2c2c;
@@ -167,6 +148,49 @@ li:hover {
     color: #1e1e1e; /* Asegura que el texto se lea bien sobre el fondo azul */
 }
 
+/* 9. Mejorar las listas y sus ítems */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    background-color: #333;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden; /* Oculta el contenido que se desborda, importante para la imagen oculta */
+    position: relative; /* Para posicionar la imagen si es necesario */
+}
+
+li:hover {
+    background-color: #4fc3f7;
+    transform: translateX(5px);
+}
+
+/* Estilo para la imagen dentro del li */
+li img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 15px; /* Espacio entre el texto del li y la imagen */
+    height: 0; /* Inicialmente oculta la imagen colapsándola */
+    opacity: 0; /* Asegura que no se vea */
+    transition: height 0.5s ease-out, opacity 0.5s ease-out; /* Transición suave para aparición */
+    object-fit: contain; /* Asegura que la imagen se vea completa */
+    display: block; /* Para que 'height' funcione correctamente */
+}
+
+/* Cuando el li es "activo", la imagen se muestra */
+li.active-list-item img {
+    height: auto; /* O ajusta a un max-height si la altura es variable */
+    opacity: 1; /* Hace que la imagen sea visible */
+    padding-bottom: 10px; /* Pequeño padding al final de la imagen */
+}
+
+/* ... (el resto de tu CSS) ... */
 
 /* 10. Estilizar el pie de página */
 footer {
