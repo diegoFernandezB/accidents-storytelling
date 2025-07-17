@@ -31,20 +31,3 @@ Aquí algunas de las visualizaciones que sustentan nuestros insights:
 
 Puedes ver el micrositio con los insights y visualizaciones en el siguiente enlace:  
 https://diegofernandezb.github.io/accidents-storytelling/
-
-(Reemplazar con la URL real una vez activado GitHub Pages)
-
-## Publicación en LinkedIn
-
-(Agregar aquí el enlace a tu publicación en LinkedIn con resumen e insights)
-
-## Estructura del repositorio
-
-├── index.html # Micrositio principal
-├── README.md # Descripción del proyecto
-├── img/ # Carpeta de imágenes
-│ ├── wordcloud.png
-│ └── pavimento_vs_accidentes.png
-├── modelos/ # Notebooks o scripts de modelos
-│ └── accidentes_modelo.ipynb
-└── data/ # Datos base usados (si corresponde)
